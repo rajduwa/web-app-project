@@ -29,7 +29,7 @@ export default function Logout() {
         (async () => {
             const data = await throwable(supabase.auth.getUser());
             setEmail(data.user.email);
-            console.log(data);
+            //console.log(data);
         })();
     }, [])
 

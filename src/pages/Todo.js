@@ -6,6 +6,7 @@ import Logout from '../components/Logout';
 export default function Todo({ session }) {
     return (
         <VStack p={4} minH="100vh">
+			<Logout />
             <Heading
                 mt="20"
                 p="5"
@@ -16,7 +17,6 @@ export default function Todo({ session }) {
             >
                 Todo List
             </Heading>
-            <Logout />
             <AddTask session={session} />
             <TaskList />
         </VStack>

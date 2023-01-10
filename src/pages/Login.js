@@ -1,9 +1,8 @@
-import { Button, HStack, VStack, Input, Text, Heading, Link, useToast, FormControl } from '@chakra-ui/react';
+import { Button, HStack, VStack, Input, Text, Heading, Link, useToast } from '@chakra-ui/react';
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import supabase from '../supabase';
 import { throwable } from '../throwable';
-
 
 export default function Login() {
 	const toast = useToast();
@@ -14,7 +13,7 @@ export default function Login() {
 		password: ''
 	});
 
-	console.log(userData);
+	//console.log(userData);
 
 	function handleChange(event) {
 		setUserData((prevUserData) => {
@@ -26,14 +25,13 @@ export default function Login() {
 	}
 
 	async function handleSubmit(event) {
-		console.log('cokolwiek');
 		event.preventDefault();
 		try {
-			const data = await throwable(supabase.auth.signInWithPassword({
+			await throwable(supabase.auth.signInWithPassword({
 				email: userData.email,
 				password: userData.password,
 			}))
-			console.log(data);
+			//console.log(data);
 			navigate('/todo');
 		} catch (error) {
 			toast({

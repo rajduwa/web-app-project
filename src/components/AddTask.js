@@ -7,9 +7,10 @@ export default function AddTask({ session }) {
 	const toast = useToast();
 
 	async function handleInsert(event) {
+		event.preventDefault();
 		try {
 			await throwable(supabase.from('todos').insert(
-				[{ text, user_id: session.user.id },
+				[{ text, user_id: session.user.id, done: false },
 				]))
 		} catch (error) {
 			toast({
@@ -24,11 +25,13 @@ export default function AddTask({ session }) {
 
 	const [text, setText] = useState('');
 	return (
-		<HStack my="4" h="45">
-			<Input id="input_id" h="100%" variant="filled" placeholder="Do the laundry" onChange={(e) => setText(e.target.value)} value={text} />
-			<Button colorScheme="blue" px="10" h="100%" onClick={handleInsert}>
-				Add
-			</Button>
-		</HStack>
+		<form onSubmit={handleInsert}>
+			<HStack my="4" h="45">
+				<Input id="input_id" h="100%" variant="filled" placeholder="Do the laundry" onChange={(e) => setText(e.target.value)} value={text} required />
+				<Button colorScheme="blue" px="10" h="100%" type="submit">
+					Add
+				</Button>
+			</HStack>
+		</form>
 	);
 }

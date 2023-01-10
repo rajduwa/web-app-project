@@ -1,9 +1,11 @@
 import { Button, HStack, VStack, Input, Text, Heading, Link, useToast } from '@chakra-ui/react';
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import supabase from '../supabase';
 import { throwable } from '../throwable';
 
 export default function Account() {
+	let navigate = useNavigate();
     const toast = useToast();
 
     const [userData, setUserData] = useState({
@@ -11,7 +13,7 @@ export default function Account() {
         password: ''
     });
 
-    console.log(userData);
+    //console.log(userData);
 
     function handleChange(event) {
         setUserData((prevUserData) => {
@@ -28,6 +30,14 @@ export default function Account() {
                 email: userData.email,
                 password: userData.password
             }))
+			toast({
+                title: 'Successfully registered!',
+                status: 'success',
+                isClosable: true,
+                position: 'top',
+                duration: 5000,
+            })
+			navigate('/');
         } catch (error) {
             toast({
                 title: error.message,

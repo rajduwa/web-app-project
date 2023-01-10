@@ -1,15 +1,15 @@
-import { VStack, StackDivider, HStack, Input, useToast } from '@chakra-ui/react';
+import { VStack, StackDivider, HStack, Input, useToast, Checkbox } from '@chakra-ui/react';
 import DeleteTask from './DeleteTask';
 import ClearTasks from './ClearTasks';
 import supabase from '../supabase';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { throwable } from '../throwable';
 
 export default function TaskList() {
 	const toast = useToast();
 	const [tasks, setTasks] = useState([]);
 
-	async function fetchData() {
+	const fetchData = useCallback(async function fetchData() {
 		try {
 			const todos = await throwable(supabase.from('todos').select('*'));
 			setTasks(todos);
@@ -23,11 +23,11 @@ export default function TaskList() {
 				duration: 5000,
 			})
 		}
-	}
+	}, [toast]);
 
 	useEffect(() => {
 		fetchData();
-	}, []);
+	}, [fetchData]);
 
 	useEffect(() => {
 		const todos = supabase.channel('todos')
@@ -48,12 +48,14 @@ export default function TaskList() {
 							for (const task of tasks) {
 								if (task.id === payload.old.id) {
 									task.text = payload.new.text;
+									task.done = payload.new.done;
+									break;
 								}
 							}
 							return [...tasks];
 						});
 					}
-					console.log('Change received!', payload)
+					console.log('Change received!', payload);
 				}
 			)
 			.subscribe();
@@ -84,6 +86,25 @@ export default function TaskList() {
 		}
 	}
 
+	async function commitDone(event, task) {
+		task.done = event.target.checked;
+		setTasks([...tasks]);
+		try {
+			await throwable(supabase
+				.from('todos')
+				.update({ done: task.done })
+				.eq('id', task.id));
+		} catch (error) {
+			toast({
+				title: error.message,
+				status: 'error',
+				isClosable: true,
+				position: 'top',
+				duration: 5000,
+			})
+		}
+	}
+
 	if (!tasks.length) {
 		return '';
 	} else {
@@ -101,6 +122,7 @@ export default function TaskList() {
 				>
 					{tasks.map(task => (
 						<HStack key={task.id}>
+							<Checkbox size="lg" isChecked={task.done} onChange={(event) => commitDone(event, task)} />
 							<Input w="100%" p="8px" borderRadius="lg" value={task.text} onChange={(event) => onTaskChange(event, task)} onBlur={() => commitTask(task)} />
 							<DeleteTask id={task.id} />
 						</HStack>

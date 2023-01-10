@@ -18,13 +18,13 @@ function App() {
       setSession(session)
     })
   }, [])
-  console.log(session);
+  //console.log(session);
 
   return (
     <Routes>
       <Route path={'/'} element={<Login/>} />
       <Route path={'/signup'} element={<SignUp />} />
-      <Route path={'/todo'} element={<Todo session={session}/>} />
+      {session&&<Route path={'/todo'} element={<Todo session={session}/>} />}
     </Routes>
   )
 }
