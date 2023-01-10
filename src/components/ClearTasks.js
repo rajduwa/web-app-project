@@ -4,7 +4,7 @@ import { throwable } from '../throwable';
 
 export default function ClearTasks() {
     const toast = useToast();
-    
+
     async function handleClear() {
         try {
             await throwable(supabase.from('todos').delete().not("id", "is", null));
@@ -21,9 +21,10 @@ export default function ClearTasks() {
 
     return (
         <Flex>
-            <Button colorScheme="gray" px="8" h="45" color="gray.500" mt="10" onClick={handleClear}>
+            <Button colorScheme="gray" px="8" h="2.75em" color="gray.500" mt="1em" onClick={handleClear}>
                 Clear Tasks
             </Button>
         </Flex>
     );
 }
+

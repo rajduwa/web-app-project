@@ -45,28 +45,36 @@ export default function Login() {
 	}
 
 	return (
-		<VStack p={4} minH="100vh">
+		<VStack p="4" mt="70">
 			<Heading
-				mt="20"
-				p="5"
 				fontWeight="extrabold"
-				size="xl"
+				size="3xl"
+				fontSize="6xl"
+				bgGradient="linear(to-l, teal.300, blue.500)"
+				bgClip="text"
+			>
+				Todo list
+			</Heading>
+			<Text
+				fontSize="4xl"
+				p="0"
+				fontWeight="extrabold"
 				bgGradient="linear(to-l, teal.300, blue.500)"
 				bgClip="text"
 			>
 				Login
-			</Heading>
+			</Text>
 			<form onSubmit={handleSubmit}>
 				<VStack my="5" h="6">
-					<Input name="email" type="email" h="100%" variant="filled" placeholder="E-mail" onChange={handleChange} />
-					<Input name="password" type="password" h="100%" variant="filled" placeholder="Password" onChange={handleChange} />
+					<Input name="email" type="email" variant="filled" placeholder="E-mail" p="1em" w="20em" onChange={handleChange} />
+					<Input name="password" type="password" variant="filled" placeholder="Password" p="1em" w="20em" onChange={handleChange} />
 					<HStack>
-						<Button type="submit" colorScheme="gray" px="8" h="35" color="gray.500">
+						<Button type="submit" colorScheme="gray" p="1em" w="10em" color="gray.500">
 							Login
 						</Button>
 					</HStack>
-					<Text>
-						Don't have an account? <Link href='/signup'>Sign Up</Link>
+					<Text p="1em">
+						Don't have an account? <Link href='/signup' color="blue.400">Sign up</Link>
 					</Text>
 				</VStack>
 			</form>

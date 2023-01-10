@@ -26,7 +26,7 @@ export default function AddTask({ session }) {
 	const [text, setText] = useState('');
 	return (
 		<form onSubmit={handleInsert}>
-			<HStack my="4" h="45">
+			<HStack my="4" h="2.75em">
 				<Input id="input_id" h="100%" variant="filled" placeholder="Do the laundry" onChange={(e) => setText(e.target.value)} value={text} required />
 				<Button colorScheme="blue" px="10" h="100%" type="submit">
 					Add

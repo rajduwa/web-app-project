@@ -11,9 +11,9 @@ export default function TaskList() {
 
 	const fetchData = useCallback(async function fetchData() {
 		try {
-			const todos = await throwable(supabase.from('todos').select('*'));
+			const todos = await throwable(supabase.from('todos').select('*').order('id'));
 			setTasks(todos);
-			console.log(todos);
+			console.log('todos', todos);
 		} catch (error) {
 			toast({
 				title: error.message,
@@ -55,7 +55,7 @@ export default function TaskList() {
 							return [...tasks];
 						});
 					}
-					console.log('Change received!', payload);
+					//console.log('Change received!', payload);
 				}
 			)
 			.subscribe();
@@ -113,7 +113,7 @@ export default function TaskList() {
 				<VStack
 					divider={<StackDivider />}
 					borderColor="gray.100"
-					borderWidth="2px"
+					borderWidth="0.15em"
 					p="5"
 					borderRadius="lg"
 					w="100%"
@@ -123,7 +123,7 @@ export default function TaskList() {
 					{tasks.map(task => (
 						<HStack key={task.id}>
 							<Checkbox size="lg" isChecked={task.done} onChange={(event) => commitDone(event, task)} />
-							<Input w="100%" p="8px" borderRadius="lg" value={task.text} onChange={(event) => onTaskChange(event, task)} onBlur={() => commitTask(task)} />
+							<Input w="100%" p="0.5em" borderRadius="lg" value={task.text} onChange={(event) => onTaskChange(event, task)} onBlur={() => commitTask(task)} />
 							<DeleteTask id={task.id} />
 						</HStack>
 					))}

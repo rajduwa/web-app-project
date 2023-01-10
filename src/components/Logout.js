@@ -1,5 +1,5 @@
 import supabase from '../supabase';
-import { Button, HStack, VStack, Input, Text, Heading, Link, IconButton, useToast } from '@chakra-ui/react';
+import { HStack, Text, IconButton, useToast } from '@chakra-ui/react';
 import { FiUserMinus } from "react-icons/fi";
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -34,9 +34,9 @@ export default function Logout() {
     }, [])
 
     return (
-        <HStack my="5" h="6">
+        <HStack my="5" h="6" p="2em">
             <IconButton isRound="true" icon={<FiUserMinus />} onClick={handleLogout} />
-            <Text>{email}</Text>
+            <Text color="gray.400">{email}</Text>
         </HStack>
     )
 }
