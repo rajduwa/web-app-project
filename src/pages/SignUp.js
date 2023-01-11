@@ -71,7 +71,7 @@ export default function Account() {
 			</Text>
 			<form onSubmit={handleSubmit}>
 				<VStack my="5" h="6">
-				<Input name="email" type="email" variant="filled" placeholder="E-mail" p="1em" w="20em" onChange={handleChange} />
+					<Input name="email" type="email" variant="filled" placeholder="E-mail" p="1em" w="20em" onChange={handleChange} />
 					<Input name="password" type="password" variant="filled" placeholder="Password" p="1em" w="20em" onChange={handleChange} />
 					<HStack>
 						<Button type="submit" colorScheme="gray" p="1em" w="10em" color="gray.500">

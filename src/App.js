@@ -6,26 +6,26 @@ import Todo from './pages/Todo';
 import supabase from './supabase';
 
 function App() {
-  const [session, setSession] = useState(null);
+	const [session, setSession] = useState(null);
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-    })
+	useEffect(() => {
+		supabase.auth.getSession().then(({ data: { session } }) => {
+			setSession(session)
+		})
 
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-  }, [])
-  //console.log(session);
+		supabase.auth.onAuthStateChange((_event, session) => {
+			setSession(session)
+		})
+	}, [])
+	//console.log(session);
 
-  return (
-    <Routes>
-      <Route path={'/'} element={<Login/>} />
-      <Route path={'/signup'} element={<SignUp />} />
-      {session&&<Route path={'/todo'} element={<Todo session={session}/>} />}
-    </Routes>
-  )
+	return (
+		<Routes>
+			<Route path={'/'} element={<Login />} />
+			<Route path={'/signup'} element={<SignUp />} />
+			{session && <Route path={'/todo'} element={<Todo session={session} />} />}
+		</Routes>
+	)
 }
 
 export default App;

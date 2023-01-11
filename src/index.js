@@ -8,12 +8,12 @@ const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 
 root.render(
-  <StrictMode>
-    <ChakraProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ChakraProvider>
-  </StrictMode>
+	<StrictMode>
+		<ChakraProvider>
+			<BrowserRouter>
+				<App />
+			</BrowserRouter>
+		</ChakraProvider>
+	</StrictMode>
 );
 

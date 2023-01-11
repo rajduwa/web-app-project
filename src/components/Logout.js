@@ -7,10 +7,10 @@ import { throwable } from '../throwable';
 
 export default function Logout() {
 	const toast = useToast();
-    const [email, setEmail] = useState('');
-    let navigate = useNavigate();
+	const [email, setEmail] = useState('');
+	let navigate = useNavigate();
 
-    async function handleLogout() {
+	async function handleLogout() {
 		try {
 			await throwable(supabase.auth.signOut());
 			navigate('/');
@@ -23,20 +23,20 @@ export default function Logout() {
 				duration: 5000,
 			})
 		}
-    }
+	}
 
-    useEffect(() => {
-        (async () => {
-            const data = await throwable(supabase.auth.getUser());
-            setEmail(data.user.email);
-            //console.log(data);
-        })();
-    }, [])
+	useEffect(() => {
+		(async () => {
+			const data = await throwable(supabase.auth.getUser());
+			setEmail(data.user.email);
+			//console.log(data);
+		})();
+	}, [])
 
-    return (
-        <HStack my="5" h="6" p="2em">
-            <IconButton isRound="true" icon={<FiUserMinus />} onClick={handleLogout} />
-            <Text color="gray.400">{email}</Text>
-        </HStack>
-    )
+	return (
+		<HStack my="5" h="6" p="2em">
+			<IconButton isRound="true" icon={<FiUserMinus />} onClick={handleLogout} />
+			<Text color="gray.400">{email}</Text>
+		</HStack>
+	)
 }

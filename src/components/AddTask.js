@@ -12,6 +12,7 @@ export default function AddTask({ session }) {
 			await throwable(supabase.from('todos').insert(
 				[{ text, user_id: session.user.id, done: false },
 				]))
+			setText('');
 		} catch (error) {
 			toast({
 				title: error.message,
@@ -27,7 +28,7 @@ export default function AddTask({ session }) {
 	return (
 		<form onSubmit={handleInsert}>
 			<HStack my="4" h="2.75em">
-				<Input id="input_id" h="100%" variant="filled" placeholder="Do the laundry" onChange={(e) => setText(e.target.value)} value={text} required />
+				<Input h="100%" variant="filled" placeholder="Do the laundry" onChange={(e) => setText(e.target.value)} value={text} required />
 				<Button colorScheme="blue" px="10" h="100%" type="submit">
 					Add
 				</Button>
