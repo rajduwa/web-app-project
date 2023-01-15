@@ -58,7 +58,7 @@ export default function Account() {
 				bgGradient="linear(to-l, teal.300, blue.500)"
 				bgClip="text"
 			>
-				Todo list
+				Exams
 			</Heading>
 			<Text
 				fontSize="4xl"

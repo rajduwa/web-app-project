@@ -13,7 +13,7 @@ export default function Todo({ session }) {
 				bgGradient="linear(to-l, teal.300, blue.500)"
 				bgClip="text"
 			>
-				Todo list
+				Exams
 			</Heading>
 			<Logout />
 			<AddTask session={session} />

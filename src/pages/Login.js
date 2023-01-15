@@ -22,6 +22,7 @@ export default function Login() {
 				[event.target.name]: event.target.value
 			}
 		})
+
 	}
 
 	async function handleSubmit(event) {
@@ -53,7 +54,7 @@ export default function Login() {
 				bgGradient="linear(to-l, teal.300, blue.500)"
 				bgClip="text"
 			>
-				Todo list
+				Exams
 			</Heading>
 			<Text
 				fontSize="4xl"
